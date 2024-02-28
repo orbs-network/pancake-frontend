@@ -3,7 +3,7 @@ import { useTranslation } from '@pancakeswap/localization'
 import { Text, Flex, Checkbox, Button } from '@pancakeswap/uikit'
 
 interface AcknowledgementProps {
-  handleContinueClick: () => void
+  handleContinueClick?: () => void
 }
 
 const Acknowledgement: React.FC<React.PropsWithChildren<AcknowledgementProps>> = ({ handleContinueClick }) => {

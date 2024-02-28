@@ -73,7 +73,6 @@ export default function Swap() {
   const handleOutputSelect = useCallback(
     (newCurrencyOutput: Currency) => {
       onCurrencySelection(Field.OUTPUT, newCurrencyOutput)
-      warningSwapHandler(newCurrencyOutput)
 
       const newCurrencyOutputId = currencyId(newCurrencyOutput)
       if (newCurrencyOutputId === inputCurrencyId) {
@@ -82,8 +81,14 @@ export default function Swap() {
       replaceBrowserHistory('outputCurrency', newCurrencyOutputId)
     },
 
-    [inputCurrencyId, outputCurrencyId, onCurrencySelection, warningSwapHandler],
+    [inputCurrencyId, outputCurrencyId, onCurrencySelection],
   )
+
+  useEffect(() => {
+    if (outputCurrency) {
+      warningSwapHandler(outputCurrency)
+    }
+  }, [outputCurrency])
 
   return (
     <Page removePadding={isChartExpanded} hideFooterOnDesktop={isChartExpanded}>
