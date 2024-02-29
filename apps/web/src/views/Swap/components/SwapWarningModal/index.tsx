@@ -1,5 +1,5 @@
 import { styled } from 'styled-components'
-import { ModalBody, ModalContainer, Message, ModalHeader, Box, Heading, Modal } from '@pancakeswap/uikit'
+import { ModalBody, Message, ModalHeader, Box, Heading, Modal } from '@pancakeswap/uikit'
 import useTheme from 'hooks/useTheme'
 import { useTranslation } from '@pancakeswap/localization'
 import { WrappedTokenInfo } from '@pancakeswap/token-lists'

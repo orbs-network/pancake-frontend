@@ -88,7 +88,7 @@ export default function Swap() {
     if (outputCurrency) {
       warningSwapHandler(outputCurrency)
     }
-  }, [outputCurrency])
+  }, [outputCurrency, warningSwapHandler])
 
   return (
     <Page removePadding={isChartExpanded} hideFooterOnDesktop={isChartExpanded}>
