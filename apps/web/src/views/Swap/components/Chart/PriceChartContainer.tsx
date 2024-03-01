@@ -5,9 +5,7 @@ import BnbWbnbNotice from './BnbWbnbNotice'
 import PriceChart from './PriceChart'
 
 type PriceChartContainerProps = {
-  inputCurrencyId: string
   inputCurrency?: Currency
-  outputCurrencyId: string
   outputCurrency?: Currency
   isChartExpanded: boolean
   setIsChartExpanded: React.Dispatch<React.SetStateAction<boolean>> | null
