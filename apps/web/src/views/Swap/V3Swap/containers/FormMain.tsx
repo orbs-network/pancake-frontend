@@ -8,7 +8,7 @@ import { formatAmount } from '@pancakeswap/utils/formatFractions'
 
 import { useSwapActionHandlers } from 'state/swap/useSwapActionHandlers'
 import CurrencyInputPanel from 'components/CurrencyInputPanel'
-import { useDefaultsFromURLSearch, useSwapState } from 'state/swap/hooks'
+import { useSwapState } from 'state/swap/hooks'
 import { Field } from 'state/swap/actions'
 import { useCurrency } from 'hooks/Tokens'
 import { CommonBasesType } from 'components/SearchModal/types'
@@ -30,9 +30,17 @@ interface Props {
   tradeLoading?: boolean
   pricingAndSlippage?: ReactNode
   swapCommitButton?: ReactNode
+  loadedUrlParams: boolean
 }
 
-export function FormMain({ pricingAndSlippage, inputAmount, outputAmount, tradeLoading, swapCommitButton }: Props) {
+export function FormMain({
+  pricingAndSlippage,
+  inputAmount,
+  outputAmount,
+  tradeLoading,
+  swapCommitButton,
+  loadedUrlParams,
+}: Props) {
   const { address: account } = useAccount()
   const { t } = useTranslation()
   const warningSwapHandler = useWarningImport()
@@ -48,7 +56,6 @@ export function FormMain({ pricingAndSlippage, inputAmount, outputAmount, tradeL
   const { onCurrencySelection, onUserInput } = useSwapActionHandlers()
   const [inputBalance] = useCurrencyBalances(account, [inputCurrency, outputCurrency])
   const maxAmountInput = useMemo(() => maxAmountSpend(inputBalance), [inputBalance])
-  const loadedUrlParams = useDefaultsFromURLSearch()
 
   const handleTypeInput = useCallback((value: string) => onUserInput(Field.INPUT, value), [onUserInput])
   const handleTypeOutput = useCallback((value: string) => onUserInput(Field.OUTPUT, value), [onUserInput])
