@@ -50,7 +50,7 @@ import {
   useUserV2SwapEnable,
   useUserV3SwapEnable,
 } from 'state/user/smartRouter'
-import { useStablecoinPrice } from 'hooks/useStablecoinPrice'
+import { useCurrencyUsdPrice } from 'hooks/useCurrencyUsdPrice'
 import { styled } from 'styled-components'
 import { getBlockExploreLink, getBlockExploreName } from 'utils'
 import currencyId from 'utils/currencyId'
@@ -102,12 +102,7 @@ const useBestTrade = (fromToken?: string, toToken?: string, value?: string) => {
 const useUsd = (address?: string) => {
   const currency = useCurrency(address)
 
-  // TODO uncomment before submitting pr
-  // return useCurrencyUsdPrice(currency).data
-
-  const price = useStablecoinPrice(currency)
-
-  return parseFloat(price?.toSignificant() || '0')
+  return useCurrencyUsdPrice(currency).data
 }
 
 const ColoredIconButton = styled(IconButton)`
