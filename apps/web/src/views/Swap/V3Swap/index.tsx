@@ -20,7 +20,7 @@ import {
 import { MMCommitButton } from './containers/MMCommitButton'
 import { useSwapBestTrade } from './hooks'
 
-export function V3SwapForm({ loadedUrlParams }: { loadedUrlParams: boolean }) {
+export function V3SwapForm() {
   const { isLoading, trade, refresh, syncing, isStale, error } = useSwapBestTrade()
   const mm = useDerivedBestTradeWithMM(trade)
   const throttledHandleRefresh = useMemo(
@@ -42,7 +42,6 @@ export function V3SwapForm({ loadedUrlParams }: { loadedUrlParams: boolean }) {
     <>
       <FormHeader onRefresh={throttledHandleRefresh} refreshDisabled={!tradeLoaded || syncing || !isStale} />
       <FormMain
-        loadedUrlParams={loadedUrlParams}
         tradeLoading={mm.isMMBetter ? false : !tradeLoaded}
         pricingAndSlippage={<PricingAndSlippage priceLoading={isLoading} price={price} showSlippage={!mm.isMMBetter} />}
         inputAmount={finalTrade?.inputAmount}
