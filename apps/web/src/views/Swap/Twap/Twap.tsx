@@ -1,34 +1,34 @@
 import { Orders, TWAP as PancakeTWAP } from '@orbs-network/twap-ui-pancake'
 import { ChainId } from '@pancakeswap/chains'
 import { useTranslation } from '@pancakeswap/localization'
+import { Price } from '@pancakeswap/sdk'
 import { Currency, CurrencyAmount, TradeType } from '@pancakeswap/swap-sdk-core'
 import {
+  ArrowUpIcon,
+  AutoColumn,
+  Box,
   BscScanIcon,
   Button,
   ChartDisableIcon,
   ChartIcon,
+  ColumnCenter,
   Flex,
   IconButton,
   Link,
+  Spinner,
+  Text,
   useMatchBreakpoints,
   useModal,
   useTooltip,
-  Spinner,
-  Text,
-  Box,
-  ArrowUpIcon,
-  ColumnCenter,
-  AutoColumn,
 } from '@pancakeswap/uikit'
-import { Price } from '@pancakeswap/sdk'
 import replaceBrowserHistory from '@pancakeswap/utils/replaceBrowserHistory'
 import truncateHash from '@pancakeswap/utils/truncateHash'
 import { useUserSingleHopOnly } from '@pancakeswap/utils/user'
 import {
   ApproveModalContent,
   Swap,
-  SwapTransactionReceiptModalContent,
   Swap as SwapUI,
+  SwapTransactionReceiptModalContent,
 } from '@pancakeswap/widgets-internal'
 import AddToWalletButton, { AddToWalletTextOptions } from 'components/AddToWallet/AddToWalletButton'
 import { BodyWrapper } from 'components/App/AppBody'
@@ -39,6 +39,7 @@ import { useAllTokens, useCurrency } from 'hooks/Tokens'
 import { useActiveChainId } from 'hooks/useActiveChainId'
 import { useBestAMMTrade } from 'hooks/useBestAMMTrade'
 import useNativeCurrency from 'hooks/useNativeCurrency'
+import { useStablecoinPrice } from 'hooks/useStablecoinPrice'
 import { useTheme } from 'next-themes'
 import { ReactNode, useCallback, useContext, useMemo } from 'react'
 import { Field } from 'state/swap/actions'
@@ -50,7 +51,6 @@ import {
   useUserV2SwapEnable,
   useUserV3SwapEnable,
 } from 'state/user/smartRouter'
-import { useCurrencyUsdPrice } from 'hooks/useCurrencyUsdPrice'
 import { styled } from 'styled-components'
 import { getBlockExploreLink, getBlockExploreName } from 'utils'
 import currencyId from 'utils/currencyId'
@@ -99,10 +99,12 @@ const useBestTrade = (fromToken?: string, toToken?: string, value?: string) => {
   }
 }
 
-const useUsd = (address?: string) => {
+const useUsd = (address?: string): number => {
   const currency = useCurrency(address)
 
-  return useCurrencyUsdPrice(currency).data
+  // return useCurrencyUsdPrice(currency).data
+  const price = useStablecoinPrice(currency)
+  return parseFloat(price?.toSignificant() || '0')
 }
 
 const ColoredIconButton = styled(IconButton)`
