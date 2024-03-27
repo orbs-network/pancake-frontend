@@ -1,4 +1,4 @@
-import { FlexGap, useMatchBreakpoints, BreakpointChecks } from "@pancakeswap/uikit";
+import { BreakpointChecks, FlexGap, useMatchBreakpoints } from "@pancakeswap/uikit";
 import { ReactNode } from "react";
 import styled from "styled-components";
 
@@ -11,7 +11,10 @@ type Props = {
   actions?: ReactNode;
 };
 
-function getContainerPadding({ isXs }: BreakpointChecks) {
+function getContainerPadding({ isXs, isMobile }: BreakpointChecks) {
+  if (isMobile) {
+    return "22px 0 22px 22px";
+  }
   if (isXs) {
     return "16px";
   }
@@ -23,7 +26,9 @@ const Container = styled(FlexGap).attrs({
   justifyContent: "space-between",
   gap: "6px",
 })<WithBreakPoints>`
-  flex: 1;
+  z-index: 2;
+  width: 50%;
+  position: relative;
   padding: ${(props) => getContainerPadding(props.$breakPoints)};
 `;
 
