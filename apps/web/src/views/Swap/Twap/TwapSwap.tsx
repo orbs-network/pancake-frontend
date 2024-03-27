@@ -3,23 +3,23 @@ import { Currency } from '@pancakeswap/sdk'
 import { BottomDrawer, Flex, Modal, ModalV2, useMatchBreakpoints } from '@pancakeswap/uikit'
 import replaceBrowserHistory from '@pancakeswap/utils/replaceBrowserHistory'
 import { AppBody } from 'components/App'
-import { useRouter } from 'next/router'
-import { useCallback, useContext, useEffect, useState } from 'react'
-import { useSwapActionHandlers } from 'state/swap/useSwapActionHandlers'
-import { currencyId } from 'utils/currencyId'
 import { useCurrency } from 'hooks/Tokens'
 import { useSwapHotTokenDisplay } from 'hooks/useSwapHotTokenDisplay'
+import { useRouter } from 'next/router'
+import { useCallback, useContext, useEffect, useState } from 'react'
 import { Field } from 'state/swap/actions'
 import { useDefaultsFromURLSearch, useSingleTokenSwapInfo, useSwapState } from 'state/swap/hooks'
+import { useSwapActionHandlers } from 'state/swap/useSwapActionHandlers'
+import { currencyId } from 'utils/currencyId'
 import Page from '../../Page'
-import { SwapFeaturesContext } from '../SwapFeaturesContext'
 import PriceChartContainer from '../components/Chart/PriceChartContainer'
 import HotTokenList from '../components/HotTokenList'
+import { SwapSelection } from '../components/SwapSelection'
 import useWarningImport from '../hooks/useWarningImport'
 import { StyledInputCurrencyWrapper, StyledSwapContainer } from '../styles'
-import { TWAPPanel, OrderHistory } from './Twap'
+import { SwapFeaturesContext } from '../SwapFeaturesContext'
 import { SwapType } from '../types'
-import { SwapSelection } from '../components/SwapSelection'
+import { OrderHistory, TWAPPanel } from './Twap'
 
 export default function TwapAndLimitSwap({ limit }: { limit?: boolean }) {
   const { query } = useRouter()
@@ -125,7 +125,7 @@ export default function TwapAndLimitSwap({ limit }: { limit?: boolean }) {
               />
             }
             isOpen={isChartDisplayed}
-            setIsOpen={setIsChartDisplayed}
+            setIsOpen={(isOpen) => setIsChartDisplayed?.(isOpen)}
           />
         )}
         {isDesktop && isSwapHotTokenDisplay && isHotTokenSupported && (
