@@ -56,6 +56,7 @@
     "@pancakeswap/permit2-sdk": "workspace:*",
     "@pancakeswap/pools": "workspace:*",
     "@pancakeswap/position-managers": "workspace:*",
+    "@pancakeswap/price-api-sdk": "workspace:*",
     "@pancakeswap/prediction": "workspace:*",
     "@pancakeswap/sdk": "workspace:*",
     "@pancakeswap/smart-router": "workspace:*",
