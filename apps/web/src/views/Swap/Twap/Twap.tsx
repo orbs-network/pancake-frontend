@@ -38,8 +38,8 @@ import { CommonBasesType } from 'components/SearchModal/types'
 import { useAllTokens, useCurrency } from 'hooks/Tokens'
 import { useActiveChainId } from 'hooks/useActiveChainId'
 import { useBestAMMTrade } from 'hooks/useBestAMMTrade'
-import { useCurrencyUsdPrice } from 'hooks/useCurrencyUsdPrice'
 import useNativeCurrency from 'hooks/useNativeCurrency'
+import { useStablecoinPrice } from 'hooks/useStablecoinPrice'
 import { useTheme } from 'next-themes'
 import { ReactNode, useCallback, useContext, useMemo } from 'react'
 import { Field } from 'state/swap/actions'
@@ -102,7 +102,10 @@ const useBestTrade = (fromToken?: string, toToken?: string, value?: string) => {
 const useUsd = (address?: string) => {
   const currency = useCurrency(address)
 
-  return useCurrencyUsdPrice(currency).data
+  // return useCurrencyUsdPrice(currency).data
+  const res = useStablecoinPrice(currency)
+
+  return res ? parseFloat(res?.toSignificant(6)) : 0
 }
 
 const ColoredIconButton = styled(IconButton)`
