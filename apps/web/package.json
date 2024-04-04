@@ -44,7 +44,7 @@
     "@gnosis.pm/safe-apps-wagmi": "^1.2.0",
     "@next/bundle-analyzer": "13.0.7",
     "@orbs-network/twap-ui": "0.9.87",
-    "@orbs-network/twap-ui-pancake": "0.9.87",
+    "@orbs-network/twap-ui-pancake": "0.9.89",
     "@pancakeswap/blog": "workspace:*",
     "@pancakeswap/chains": "workspace:*",
     "@pancakeswap/farms": "workspace:*",
