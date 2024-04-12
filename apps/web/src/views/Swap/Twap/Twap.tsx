@@ -103,7 +103,7 @@ const useUsd = (address?: string) => {
   const currency = useCurrency(address)
 
   // return useCurrencyUsdPrice(currency).data
-  const res = useStablecoinPrice(currency).toSignificant(6)
+  const res = useStablecoinPrice(currency)?.toSignificant(6)
   return res ? parseFloat(res) : 0
 }
 
