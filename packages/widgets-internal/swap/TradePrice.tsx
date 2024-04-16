@@ -1,18 +1,24 @@
-import { Price, Currency } from "@pancakeswap/swap-sdk-core";
+import { Currency, Price } from "@pancakeswap/swap-sdk-core";
+import { AtomBox, AutoRenewIcon, Loading, SwapCSS, SyncAltIcon, Text } from "@pancakeswap/uikit";
 import { formatPrice } from "@pancakeswap/utils/formatFractions";
-import { useState } from "react";
-import { AtomBox, SyncAltIcon, AutoRenewIcon, Text, Loading, SwapCSS } from "@pancakeswap/uikit";
+import { useCallback, useState } from "react";
 
 interface TradePriceProps {
   price?: Price<Currency, Currency>;
   loading?: boolean;
+  onClick?: () => void;
 }
 
-export function TradePrice({ price, loading }: TradePriceProps) {
+export function TradePrice({ price, loading, onClick }: TradePriceProps) {
   const [showInverted, setShowInverted] = useState<boolean>(false);
 
   const formattedPrice = showInverted ? formatPrice(price, 6) : formatPrice(price?.invert(), 6);
   const show = Boolean(price?.baseCurrency && price?.quoteCurrency);
+
+  const onSetShowInverted = useCallback(() => {
+    onClick?.();
+    setShowInverted(!showInverted);
+  }, [setShowInverted, showInverted, onClick]);
 
   return (
     <Text
@@ -29,7 +35,7 @@ export function TradePrice({ price, loading }: TradePriceProps) {
               <Loading width="12px" height="12px" />
             </AtomBox>
           ) : (
-            <AtomBox role="button" className={SwapCSS.iconButtonClass} onClick={() => setShowInverted(!showInverted)}>
+            <AtomBox role="button" className={SwapCSS.iconButtonClass} onClick={onSetShowInverted}>
               <AutoRenewIcon width="14px" />
             </AtomBox>
           )}

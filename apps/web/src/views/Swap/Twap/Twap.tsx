@@ -40,6 +40,7 @@ import { useActiveChainId } from 'hooks/useActiveChainId'
 import { useBestAMMTrade } from 'hooks/useBestAMMTrade'
 import { useCurrencyUsdPrice } from 'hooks/useCurrencyUsdPrice'
 import useNativeCurrency from 'hooks/useNativeCurrency'
+import { useSwapHotTokenDisplay } from 'hooks/useSwapHotTokenDisplay'
 import { useTheme } from 'next-themes'
 import { ReactNode, useCallback, useContext, useMemo } from 'react'
 import { Field } from 'state/swap/actions'
@@ -55,7 +56,6 @@ import { styled } from 'styled-components'
 import { getBlockExploreLink, getBlockExploreName } from 'utils'
 import currencyId from 'utils/currencyId'
 import { useAccount } from 'wagmi'
-import { useSwapHotTokenDisplay } from 'hooks/useSwapHotTokenDisplay'
 import { Wrapper } from '../components/styleds'
 import { SwapTransactionErrorContent } from '../components/SwapTransactionErrorContent'
 import useWarningImport from '../hooks/useWarningImport'
@@ -235,10 +235,11 @@ const TradePrice = (props: {
   inputAmount: string
   outAmount: string
   loading?: boolean
+  onClick: () => void
 }) => {
   const price = useMemo(() => {
-    const inputAmountCurrency = CurrencyAmount.fromRawAmount(props.inputCurrency, BigInt(props.inputAmount))
-    const outputAmountCurrency = CurrencyAmount.fromRawAmount(props.outputCurrency, BigInt(props.outAmount))
+    const inputAmountCurrency = CurrencyAmount.fromRawAmount(props.inputCurrency, BigInt(props.inputAmount || 0))
+    const outputAmountCurrency = CurrencyAmount.fromRawAmount(props.outputCurrency, BigInt(props.outAmount || 0))
     return new Price(
       inputAmountCurrency.currency,
       outputAmountCurrency.currency,
@@ -248,7 +249,7 @@ const TradePrice = (props: {
   }, [props.inputCurrency, props.outputCurrency, props.inputAmount, props.outAmount])
 
   if (!price) return null
-  return <SwapUI.TradePrice loading={props.loading} price={price} />
+  return <SwapUI.TradePrice onClick={props.onClick} loading={props.loading} price={price} />
 }
 
 export const SwapPendingModalContent: React.FC<{ title: string; showIcon?: boolean; children?: ReactNode }> = ({
