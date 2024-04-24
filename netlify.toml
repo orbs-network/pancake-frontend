@@ -1,6 +1,0 @@
-[build]
-  # Specify the build command for your monorepo
-  command = "pnpm run build"
-
-  # Specify the publish directory relative to the root of your monorepo
-  publish = "apps/web/.next"  # Adjust this path as needed

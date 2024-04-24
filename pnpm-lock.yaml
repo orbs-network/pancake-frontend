@@ -822,11 +822,11 @@ importers:
         specifier: 13.0.7
         version: 13.0.7
       '@orbs-network/twap-ui':
-        specifier: 0.10.3
-        version: 0.10.3(@ethersproject/abi@5.7.0)(@ethersproject/providers@5.7.2)(@typechain/ethers-v5@10.2.1)(@types/react@18.2.37)(chalk@4.1.2)(encoding@0.1.13)(ethers@5.7.2)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)(web3-core@1.10.4)(web3-eth-contract@1.10.4)
+        specifier: 0.10.5
+        version: 0.10.5(@ethersproject/abi@5.7.0)(@ethersproject/providers@5.7.2)(@typechain/ethers-v5@10.2.1)(@types/react@18.2.37)(chalk@4.1.2)(encoding@0.1.13)(ethers@5.7.2)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)(web3-core@1.10.4)(web3-eth-contract@1.10.4)
       '@orbs-network/twap-ui-pancake':
-        specifier: 0.10.3
-        version: 0.10.3(@emotion/react@11.11.4)(@ethersproject/abi@5.7.0)(@ethersproject/providers@5.7.2)(@typechain/ethers-v5@10.2.1)(@types/react@18.2.37)(chalk@4.1.2)(encoding@0.1.13)(ethers@5.7.2)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)(web3-core@1.10.4)(web3-eth-contract@1.10.4)
+        specifier: 0.10.5
+        version: 0.10.5(@emotion/react@11.11.4)(@ethersproject/abi@5.7.0)(@ethersproject/providers@5.7.2)(@typechain/ethers-v5@10.2.1)(@types/react@18.2.37)(chalk@4.1.2)(encoding@0.1.13)(ethers@5.7.2)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)(web3-core@1.10.4)(web3-eth-contract@1.10.4)
       '@pancakeswap/blog':
         specifier: workspace:*
         version: link:../../packages/blog
@@ -9221,8 +9221,8 @@ packages:
     dev: false
     optional: true
 
-  /@orbs-network/twap-ui-pancake@0.10.3(@emotion/react@11.11.4)(@ethersproject/abi@5.7.0)(@ethersproject/providers@5.7.2)(@typechain/ethers-v5@10.2.1)(@types/react@18.2.37)(chalk@4.1.2)(encoding@0.1.13)(ethers@5.7.2)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)(web3-core@1.10.4)(web3-eth-contract@1.10.4):
-    resolution: {integrity: sha512-UbGmZHCy4JzuRMNNWcPn7xeYPyfh9qkWi7z1chEnIBiibShn4dWNi7OfBoqsLGil+Tfh8dohASQc/DWbeZ626w==}
+  /@orbs-network/twap-ui-pancake@0.10.5(@emotion/react@11.11.4)(@ethersproject/abi@5.7.0)(@ethersproject/providers@5.7.2)(@typechain/ethers-v5@10.2.1)(@types/react@18.2.37)(chalk@4.1.2)(encoding@0.1.13)(ethers@5.7.2)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)(web3-core@1.10.4)(web3-eth-contract@1.10.4):
+    resolution: {integrity: sha512-Yfnyxbqnf3zsL59Ai0PgQ0Tu2tIrEcqBZhbhUUEzrHFZ0TglwdvVPI+5lVOtSm4B9umh+1/+GskFrLWEYm9U5Q==}
     peerDependencies:
       react: '*'
       react-dom: '*'
@@ -9231,7 +9231,7 @@ packages:
       '@mui/material': 5.15.10(@emotion/react@11.11.4)(@emotion/styled@11.11.5)(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0)
       '@mui/system': 5.15.9(@emotion/react@11.11.4)(@emotion/styled@11.11.5)(@types/react@18.2.37)(react@18.2.0)
       '@orbs-network/twap': 1.24.1(@ethersproject/abi@5.7.0)(@ethersproject/providers@5.7.2)(@typechain/ethers-v5@10.2.1)(chalk@4.1.2)(encoding@0.1.13)(ethers@5.7.2)(web3-core@1.10.4)(web3-eth-contract@1.10.4)
-      '@orbs-network/twap-ui': 0.10.3(@ethersproject/abi@5.7.0)(@ethersproject/providers@5.7.2)(@typechain/ethers-v5@10.2.1)(@types/react@18.2.37)(chalk@4.1.2)(encoding@0.1.13)(ethers@5.7.2)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)(web3-core@1.10.4)(web3-eth-contract@1.10.4)
+      '@orbs-network/twap-ui': 0.10.5(@ethersproject/abi@5.7.0)(@ethersproject/providers@5.7.2)(@typechain/ethers-v5@10.2.1)(@types/react@18.2.37)(chalk@4.1.2)(encoding@0.1.13)(ethers@5.7.2)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)(web3-core@1.10.4)(web3-eth-contract@1.10.4)
       lodash: 4.17.21
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -9259,8 +9259,8 @@ packages:
       - web3-eth-contract
     dev: false
 
-  /@orbs-network/twap-ui@0.10.3(@ethersproject/abi@5.7.0)(@ethersproject/providers@5.7.2)(@typechain/ethers-v5@10.2.1)(@types/react@18.2.37)(chalk@4.1.2)(encoding@0.1.13)(ethers@5.7.2)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)(web3-core@1.10.4)(web3-eth-contract@1.10.4):
-    resolution: {integrity: sha512-Cv/PZkfbsFPAakLL2Sm60nkx1ut4giDDjDKOkuBdirDTeb5F9yH5TXdQ7JAYFZhTQHnMjd53890D4ABengc02A==}
+  /@orbs-network/twap-ui@0.10.5(@ethersproject/abi@5.7.0)(@ethersproject/providers@5.7.2)(@typechain/ethers-v5@10.2.1)(@types/react@18.2.37)(chalk@4.1.2)(encoding@0.1.13)(ethers@5.7.2)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)(web3-core@1.10.4)(web3-eth-contract@1.10.4):
+    resolution: {integrity: sha512-fTIVhN8jz4yM96OTvKr+XFaszV3CgZu+7JUDhmGhx5ah+FuZM9484HcaAfIm2d6Rg4Ub3mRRAQR502iFVosA3A==}
     peerDependencies:
       react: '*'
       react-dom: '*'
