@@ -1,11 +1,12 @@
 import { Orders, TWAP as PancakeTWAP } from '@orbs-network/twap-ui-pancake'
 import { ChainId } from '@pancakeswap/chains'
 import { useTranslation } from '@pancakeswap/localization'
-import { Price } from '@pancakeswap/sdk'
 import { Currency, CurrencyAmount, TradeType } from '@pancakeswap/swap-sdk-core'
 import {
   ArrowUpIcon,
+  AtomBox,
   AutoColumn,
+  AutoRenewIcon,
   Box,
   BscScanIcon,
   Button,
@@ -15,7 +16,10 @@ import {
   Flex,
   IconButton,
   Link,
+  Loading,
   Spinner,
+  SwapCSS,
+  SyncAltIcon,
   Text,
   useMatchBreakpoints,
   useModal,
@@ -24,12 +28,7 @@ import {
 import replaceBrowserHistory from '@pancakeswap/utils/replaceBrowserHistory'
 import truncateHash from '@pancakeswap/utils/truncateHash'
 import { useUserSingleHopOnly } from '@pancakeswap/utils/user'
-import {
-  ApproveModalContentV1,
-  Swap,
-  Swap as SwapUI,
-  SwapTransactionReceiptModalContentV1,
-} from '@pancakeswap/widgets-internal'
+import { ApproveModalContentV1, Swap, SwapTransactionReceiptModalContentV1 } from '@pancakeswap/widgets-internal'
 import AddToWalletButton, { AddToWalletTextOptions } from 'components/AddToWallet/AddToWalletButton'
 import { BodyWrapper } from 'components/App/AppBody'
 import ConnectWalletButton from 'components/ConnectWalletButton'
@@ -224,34 +223,11 @@ export function TWAPPanel({ limit }: { limit?: boolean }) {
           SwapPendingModalContent={SwapPendingModalContent}
           SwapTransactionReceiptModalContent={TwapSwapTransactionReceiptModalContent}
           AddToWallet={AddToWallet}
-          TradePrice={TradePrice}
+          TradePrice={TwapTradePrice}
         />
       </FormContainer>
     </>
   )
-}
-
-const TradePrice = (props: {
-  inputCurrency: Currency
-  outputCurrency: Currency
-  inputAmount: string
-  outAmount: string
-  loading?: boolean
-  onClick: () => void
-}) => {
-  const price = useMemo(() => {
-    const inputAmountCurrency = CurrencyAmount.fromRawAmount(props.inputCurrency, BigInt(props.inputAmount))
-    const outputAmountCurrency = CurrencyAmount.fromRawAmount(props.outputCurrency, BigInt(props.outAmount))
-    return new Price(
-      inputAmountCurrency.currency,
-      outputAmountCurrency.currency,
-      inputAmountCurrency.quotient,
-      outputAmountCurrency.quotient,
-    )
-  }, [props.inputCurrency, props.outputCurrency, props.inputAmount, props.outAmount])
-
-  if (!price) return null
-  return <SwapUI.TradePrice onClick={props.onClick} loading={props.loading} price={price} />
 }
 
 export const SwapPendingModalContent: React.FC<{ title: string; showIcon?: boolean; children?: ReactNode }> = ({
@@ -376,5 +352,39 @@ const AddToWallet = ({
       tokenDecimals={decimals}
       tokenLogo={logo}
     />
+  )
+}
+
+function TwapTradePrice({
+  price,
+  loading,
+  onClick,
+  leftSymbol,
+  rightSymbol,
+}: {
+  loading?: boolean
+  price?: string
+  onClick?: () => void
+  leftSymbol?: string
+  rightSymbol?: string
+}) {
+  return (
+    <Text
+      fontSize="14px"
+      style={{ justifyContent: 'center', alignItems: 'center', display: 'flex', opacity: loading ? 0.6 : 1 }}
+    >
+      {`1 ${leftSymbol}`}
+      <SyncAltIcon width="14px" height="14px" color="textSubtle" ml="4px" mr="4px" />
+      {`${price} ${rightSymbol}`}
+      {loading ? (
+        <AtomBox className={SwapCSS.iconButtonClass}>
+          <Loading width="12px" height="12px" />
+        </AtomBox>
+      ) : (
+        <AtomBox role="button" className={SwapCSS.iconButtonClass} onClick={onClick}>
+          <AutoRenewIcon width="14px" />
+        </AtomBox>
+      )}
+    </Text>
   )
 }
