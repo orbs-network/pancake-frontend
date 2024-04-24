@@ -101,7 +101,6 @@ const useBestTrade = (fromToken?: string, toToken?: string, value?: string) => {
 
 const useUsd = (address?: string) => {
   const currency = useCurrency(address)
-
   // return useCurrencyUsdPrice(currency).data
   const val = useStablecoinPrice(currency)?.toSignificant(6)
   return val ? parseFloat(val) : 0
