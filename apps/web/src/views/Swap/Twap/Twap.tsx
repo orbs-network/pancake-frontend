@@ -222,7 +222,8 @@ export function TWAPPanel({ limit }: { limit?: boolean }) {
           SwapPendingModalContent={SwapPendingModalContent}
           SwapTransactionReceiptModalContent={TwapSwapTransactionReceiptModalContent}
           AddToWallet={AddToWallet}
-          TradePrice={TwapTradePrice}
+          TradePrice={TradePrice}
+          TradePriceToggle={TradePriceToggle}
         />
       </FormContainer>
     </>
@@ -354,36 +355,24 @@ const AddToWallet = ({
   )
 }
 
-function TwapTradePrice({
-  price,
-  loading,
-  onClick,
-  leftSymbol,
-  rightSymbol,
-}: {
-  loading?: boolean
-  price?: string
-  onClick?: () => void
-  leftSymbol?: string
-  rightSymbol?: string
-}) {
+const TradePriceToggle = ({ onClick, loading }: { onClick: () => void; loading: boolean }) => {
+  return loading ? (
+    <AtomBox className={SwapCSS.iconButtonClass}>
+      <Loading width="14px" height="14px" />
+    </AtomBox>
+  ) : (
+    <AtomBox role="button" className={SwapCSS.iconButtonClass} onClick={onClick}>
+      <AutoRenewIcon width="16px" />
+    </AtomBox>
+  )
+}
+
+function TradePrice({ price, leftSymbol, rightSymbol }: { price?: string; leftSymbol?: string; rightSymbol?: string }) {
   return (
-    <Text
-      fontSize="14px"
-      style={{ justifyContent: 'center', alignItems: 'center', display: 'flex', opacity: loading ? 0.6 : 1 }}
-    >
+    <Text fontSize="14px" style={{ justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
       {`1 ${leftSymbol}`}
       <SyncAltIcon width="14px" height="14px" color="textSubtle" ml="4px" mr="4px" />
       {`${price} ${rightSymbol}`}
-      {loading ? (
-        <AtomBox className={SwapCSS.iconButtonClass}>
-          <Loading width="12px" height="12px" />
-        </AtomBox>
-      ) : (
-        <AtomBox role="button" className={SwapCSS.iconButtonClass} onClick={onClick}>
-          <AutoRenewIcon width="14px" />
-        </AtomBox>
-      )}
     </Text>
   )
 }
