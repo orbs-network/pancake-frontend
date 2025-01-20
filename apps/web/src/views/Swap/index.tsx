@@ -1,6 +1,5 @@
 import { Currency } from '@pancakeswap/sdk'
 import { BottomDrawer, Flex, useMatchBreakpoints } from '@pancakeswap/uikit'
-import { AppBody } from 'components/App'
 import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 
@@ -9,12 +8,8 @@ import { useSwapHotTokenDisplay } from 'hooks/useSwapHotTokenDisplay'
 import { Field } from 'state/swap/actions'
 import { useSingleTokenSwapInfo, useSwapState } from 'state/swap/hooks'
 import Page from '../Page'
-import { SwapFeaturesContext } from './SwapFeaturesContext'
-import { V3SwapForm } from './V3Swap'
 import PriceChartContainer from './components/Chart/PriceChartContainer'
-import { SwapSelection } from './components/SwapSelection'
-import { StyledInputCurrencyWrapper, StyledSwapContainer } from './styles'
-import { SwapType } from './types'
+import { SwapFeaturesContext } from './SwapFeaturesContext'
 
 export default function Swap() {
   const { query } = useRouter()
@@ -91,7 +86,7 @@ export default function Swap() {
             setIsOpen={(isOpen) => setIsChartDisplayed?.(isOpen)}
           />
         )}
-        <Flex flexDirection="column">
+        {/* <Flex flexDirection="column">
           <StyledSwapContainer $isChartExpanded={isChartExpanded}>
             <StyledInputCurrencyWrapper mt={isChartExpanded ? '24px' : '0'}>
               <SwapSelection swapType={SwapType.MARKET} />
@@ -100,7 +95,7 @@ export default function Swap() {
               </AppBody>
             </StyledInputCurrencyWrapper>
           </StyledSwapContainer>
-        </Flex>
+        </Flex> */}
       </Flex>
     </Page>
   )
