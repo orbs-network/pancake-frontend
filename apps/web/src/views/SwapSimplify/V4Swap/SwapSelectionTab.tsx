@@ -1,5 +1,5 @@
 import { useTranslation } from '@pancakeswap/localization'
-import { ButtonMenu, ButtonMenuItem } from '@pancakeswap/uikit'
+import { ButtonMenu, ButtonMenuItem, Text, TooltipText, useMatchBreakpoints, useTooltip } from '@pancakeswap/uikit'
 import GlobalSettings from 'components/Menu/GlobalSettings'
 import { useActiveChainId } from 'hooks/useActiveChainId'
 import { useRouter } from 'next/router'
@@ -20,6 +20,23 @@ const StyledButtonMenuItem = styled(ButtonMenuItem)`
   * ${({ theme }) => theme.mediaQueries.md} {
     width: 124px;
     padding: 0px 24px;
+  }
+`
+const StyledButtonMenuItemTooltip = styled(StyledButtonMenuItem)`
+  padding: 0px;
+  > div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    padding: 0px 16px;
+    color: inherit;
+    font-weight: inherit;
+  }
+  * ${({ theme }) => theme.mediaQueries.md} {
+    padding: 0px;
   }
 `
 
@@ -71,6 +88,16 @@ export const SwapSelection = ({
     [router],
   )
   const { chainId } = useActiveChainId()
+  const { isMobile } = useMatchBreakpoints()
+
+  const { targetRef, tooltip, tooltipVisible } = useTooltip(
+    <Text>
+      {t(
+        'TWAP (Time-Weighted Average Price) helps minimises market impact from large orders by averaging the asset price over a set time period.',
+      )}
+    </Text>,
+    { placement: 'top' },
+  )
 
   // NOTE: Commented out until charts are supported again
   // const { isChartSupported, isChartDisplayed, setIsChartDisplayed, isHotTokenSupported } =
@@ -104,7 +131,15 @@ export const SwapSelection = ({
         fullWidth
       >
         <StyledButtonMenuItem>{t('Swap')}</StyledButtonMenuItem>
-        <StyledButtonMenuItem {...tSwapProps}>{t('TWAP')}</StyledButtonMenuItem>
+        {isMobile ? (
+          <StyledButtonMenuItemTooltip {...tSwapProps}>{t('TWAP')}</StyledButtonMenuItemTooltip>
+        ) : (
+          <StyledButtonMenuItemTooltip {...tSwapProps}>
+            <TooltipText ref={targetRef}>{t('TWAP')}</TooltipText>
+            {tooltipVisible && tooltip}
+          </StyledButtonMenuItemTooltip>
+        )}
+
         <StyledButtonMenuItem {...tSwapProps}>{t('Limit')}</StyledButtonMenuItem>
       </ButtonMenu>
       {/* NOTE: Commented out until charts are supported again */}

@@ -3685,5 +3685,6 @@
   "Private IFO": "Private IFO",
   "Unlimited IFO": "Unlimited IFO",
   "Basic IFO": "Basic IFO",
-  "%percentageVested%% of the purchased token will be released at the end of the vesting schedule. %percentageTgeRelease%% of the purchased token will be released immediately and available for claiming when IFO ends.": "%percentageVested%% of the purchased token will be released at the end of the vesting schedule. %percentageTgeRelease%% of the purchased token will be released immediately and available for claiming when IFO ends."
+  "%percentageVested%% of the purchased token will be released at the end of the vesting schedule. %percentageTgeRelease%% of the purchased token will be released immediately and available for claiming when IFO ends.": "%percentageVested%% of the purchased token will be released at the end of the vesting schedule. %percentageTgeRelease%% of the purchased token will be released immediately and available for claiming when IFO ends.",
+  "TWAP (Time-Weighted Average Price) helps minimises market impact from large orders by averaging the asset price over a set time period.": "TWAP (Time-Weighted Average Price) helps minimises market impact from large orders by averaging the asset price over a set time period."
 }
