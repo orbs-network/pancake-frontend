@@ -7,6 +7,7 @@ import {
   Button,
   domAnimation,
   LazyAnimatePresence,
+  ReactMarkdown,
   useMatchBreakpoints,
   useModal,
   useToast,
@@ -41,6 +42,8 @@ import { keyframes, styled } from 'styled-components'
 import currencyId from 'utils/currencyId'
 import { maxAmountSpend } from 'utils/maxAmountSpend'
 import { useAccount } from 'wagmi'
+import { useTranslation } from '@pancakeswap/localization'
+
 import ArrowDark from '../../../../public/images/swap/arrow_dark.json' assert { type: 'json' }
 import ArrowLight from '../../../../public/images/swap/arrow_light.json' assert { type: 'json' }
 import { Wrapper } from '../components/styleds'
@@ -154,6 +157,23 @@ const useTwapToast = () => {
   )
 }
 
+const Markdown = ({ children }: { children: string }) => {
+  return (
+    <ReactMarkdown
+      components={{
+        p: ({ children }) => <p style={{ lineHeight: 'normal' }}>{children}</p>,
+        a: ({ href, children }) => (
+          <a href={href} target="_blank" rel="noopener noreferrer">
+            {children}
+          </a>
+        ),
+      }}
+    >
+      {children}
+    </ReactMarkdown>
+  )
+}
+
 export function TWAPPanel({ limit }: { limit?: boolean }) {
   const { isDesktop } = useMatchBreakpoints()
   const { chainId } = useActiveChainId()
@@ -202,6 +222,8 @@ export function TWAPPanel({ limit }: { limit?: boolean }) {
   const inputCurrency = useCurrency(inputCurrencyId)
   const outputCurrency = useCurrency(outputCurrencyId)
 
+  const { t } = useTranslation()
+
   return (
     <QuoteProvider>
       <PancakeTWAP
@@ -219,6 +241,7 @@ export function TWAPPanel({ limit }: { limit?: boolean }) {
         onSrcTokenSelected={onSrcTokenSelected}
         onDstTokenSelected={onDstTokenSelected}
         isMobile={!isDesktop}
+        t={t}
         nativeToken={native}
         connector={connector}
         useTooltip={useTooltip}
@@ -229,6 +252,7 @@ export function TWAPPanel({ limit }: { limit?: boolean }) {
         Input={Input}
         CurrencyLogo={TokenLogo}
         Balance={Balance}
+        ReactMarkdown={Markdown}
       />
     </QuoteProvider>
   )

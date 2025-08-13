@@ -98,10 +98,11 @@ const whitelist = [
   'Try it now',
   'This Product is in beta.',
   'Smart contract wallets are currently not supported on Bridge. To continue, please switch back to an EOA (Externally Owned Account) wallet before interacting with the product.',
+  ...Object.keys(translations).filter((k) => k.startsWith('twap.')),
 ]
 
 describe.concurrent('Check translations integrity', () => {
-  const scope = ['solana']
+  const scope = ['solana', 'twap']
   const skipEqualTestRegex = new RegExp(`^(${scope.join('|')})\\.[a-z][a-z0-9_]*$`, 'i')
   it.each(allTranslationKeys.filter((key) => !skipEqualTestRegex.test(key)))(
     'Translation key value should be equal',
