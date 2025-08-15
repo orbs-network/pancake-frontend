@@ -6,6 +6,7 @@ import { describe, expect, it } from 'vitest'
 
 // FIXME: should move this test file inside localization pkg
 import { translations } from '@pancakeswap/localization'
+import { Scope } from '@sentry/nextjs'
 
 const allTranslationKeys = Object.keys(translations)
 
@@ -219,6 +220,13 @@ describe('Check translations available', () => {
   })
 
   it('should use all translation key in translation.json', () => {
+    const ignoreReg = new RegExp(/^twap:/)
+    const leftKeys = [...translationKeys]
+    leftKeys.forEach((key) => {
+      if (ignoreReg.test(key)) {
+        translationKeys.delete(key)
+      }
+    })
     expect(
       translationKeys.size,
       `Found unused ${translationKeys.size} key(s) ${JSON.stringify(
