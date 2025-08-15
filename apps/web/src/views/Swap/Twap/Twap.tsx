@@ -45,17 +45,19 @@ import currencyId from 'utils/currencyId'
 import { maxAmountSpend } from 'utils/maxAmountSpend'
 import { useAccount } from 'wagmi'
 import { useTranslation } from '@pancakeswap/localization'
+import { useSwitchNetwork } from 'hooks/useSwitchNetwork'
+import { useRouter } from 'next/router'
+import CurrencyInputPanelSimplify from 'components/CurrencyInputPanelSimplify'
+
+import useWarningImport from '../hooks/useWarningImport'
 
 import ArrowDark from '../../../../public/images/swap/arrow_dark.json' assert { type: 'json' }
 import ArrowLight from '../../../../public/images/swap/arrow_light.json' assert { type: 'json' }
 import { Wrapper } from '../components/styleds'
 import { SwapTransactionErrorContent } from '../components/SwapTransactionErrorContent'
-import useWarningImport from '../hooks/useWarningImport'
-import { useSwitchNetwork } from 'hooks/useSwitchNetwork'
+
 import { useBridgeAvailableRoutes } from '../Bridge/hooks'
-import { useRouter } from 'next/router'
 import { handleCurrencySelectFn } from '../../SwapSimplify/InfinitySwap/FormMainInfinity'
-import CurrencyInputPanelSimplify from 'components/CurrencyInputPanelSimplify'
 
 const Lottie = dynamic(() => import('lottie-react'), { ssr: false })
 
@@ -203,9 +205,6 @@ const TokenPanelInput = ({
       onChange(maxAmountInput.toExact())
     }
   }, [maxAmountInput, onChange, isSrcToken])
-
-  console.log({ inputCurrency })
-
   return (
     <Suspense fallback={<Skeleton animation="pulse" variant="round" width="100%" height="80px" />}>
       <CurrencyInputPanelSimplify
@@ -319,8 +318,6 @@ export function TWAPPanel({ limit }: { limit?: boolean }) {
 
   const inputCurrency = useCurrency(inputCurrencyId, inputChainId)
   const outputCurrency = useCurrency(outputCurrencyId, outputChainId)
-
-  console.log(inputCurrency, outputCurrency)
 
   const { t } = useTranslation()
 

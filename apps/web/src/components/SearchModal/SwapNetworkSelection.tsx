@@ -17,14 +17,15 @@ import take from 'lodash/take'
 import { CROSSCHAIN_SUPPORTED_CHAINS } from 'quoter/utils/crosschain-utils/config'
 import { useMemo, useRef } from 'react'
 import { css, styled } from 'styled-components'
+import { useRouter } from 'next/router'
+
 import { chainNameConverter } from 'utils/chainNameConverter'
 import { useBridgeAvailableChains } from 'views/Swap/Bridge/hooks'
 import { chains as evmChains } from 'utils/wagmi'
 import { UNSUPPORTED_SOCIAL_LOGIC_CHAINS } from 'wallet/Privy/constants'
+import { TWAP_SUPPORTED_CHAINS } from 'views/Swap/utils'
 
 import { BaseWrapper, ButtonWrapper, RowWrapper } from './CommonBases'
-import { useRouter } from 'next/router'
-import { TWAP_SUPPORTED_CHAINS } from 'views/Swap/utils'
 
 const NetworkMenuColumn = styled(Flex)`
   flex-direction: column;
