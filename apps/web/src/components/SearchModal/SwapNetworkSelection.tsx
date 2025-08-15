@@ -23,6 +23,8 @@ import { chains as evmChains } from 'utils/wagmi'
 import { UNSUPPORTED_SOCIAL_LOGIC_CHAINS } from 'wallet/Privy/constants'
 
 import { BaseWrapper, ButtonWrapper, RowWrapper } from './CommonBases'
+import { useRouter } from 'next/router'
+import { TWAP_SUPPORTED_CHAINS } from 'views/Swap/utils'
 
 const NetworkMenuColumn = styled(Flex)`
   flex-direction: column;
@@ -54,6 +56,21 @@ const ChainOption = styled(Flex)`
   transition: background-color 0.15s;
 `
 
+const useIsTwap = () => {
+  const router = useRouter()
+  return router.pathname.includes('twap') || router.pathname.includes('limit')
+}
+
+const useCustomChains = () => {
+  const isTWAP = useIsTwap()
+  return useMemo(() => {
+    if (isTWAP) {
+      return TWAP_SUPPORTED_CHAINS
+    }
+    return undefined
+  }, [isTWAP])
+}
+
 export default function SwapNetworkSelection({
   chainId,
   onSelect,
@@ -64,6 +81,7 @@ export default function SwapNetworkSelection({
   onSelect: (chainId: UnifiedChainId) => void
 }) {
   const { chainId: activeChainId } = useActiveChainId()
+  const isTWAP = useIsTwap()
 
   const usedChainId = chainId ?? activeChainId
 
@@ -71,9 +89,17 @@ export default function SwapNetworkSelection({
     originChainId: isDependent ? activeChainId : usedChainId,
   })
 
+  const customChains = useCustomChains()
+
   const { t } = useTranslation()
 
+  // if is twap and is dependent, show only the selected chain
+  const showOnlySelectedChain = isTWAP && isDependent
+
   const supportedChains = useMemo(() => {
+    if (showOnlySelectedChain) {
+      return Chains.filter((chain) => chain.id === usedChainId)
+    }
     if (isDependent) {
       return Chains.filter((chain) => chain.id === usedChainId || supportedBridgeChains.includes(chain.id))
     }
@@ -86,9 +112,13 @@ export default function SwapNetworkSelection({
         return false
       }
 
+      if (customChains) {
+        return customChains.includes(chain.id as number)
+      }
+
       return true
     })
-  }, [supportedBridgeChains, usedChainId, isDependent])
+  }, [supportedBridgeChains, usedChainId, isDependent, customChains, showOnlySelectedChain])
 
   const selectedChain = useMemo(
     () => supportedChains.find((chain) => chain.id === usedChainId),

@@ -8,6 +8,8 @@ import {
   domAnimation,
   LazyAnimatePresence,
   ReactMarkdown,
+  Skeleton,
+  Text,
   useMatchBreakpoints,
   useModal,
   useToast,
@@ -32,10 +34,10 @@ import { useQuoteContext } from 'quoter/hook/QuoteContext'
 import { multicallGasLimitAtom } from 'quoter/hook/useMulticallGasLimit'
 import { QuoteProvider } from 'quoter/QuoteProvider'
 import { createQuoteQuery } from 'quoter/utils/createQuoteQuery'
-import { memo, useCallback, useMemo, useRef } from 'react'
+import { memo, Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useCurrentBlock } from 'state/block/hooks'
 import { Field } from 'state/swap/actions'
-import { useSwapState } from 'state/swap/hooks'
+import { useDefaultsFromURLSearch, useSwapState } from 'state/swap/hooks'
 import { useSwapActionHandlers } from 'state/swap/useSwapActionHandlers'
 import { useCurrencyBalances } from 'state/wallet/hooks'
 import { keyframes, styled } from 'styled-components'
@@ -49,6 +51,11 @@ import ArrowLight from '../../../../public/images/swap/arrow_light.json' assert 
 import { Wrapper } from '../components/styleds'
 import { SwapTransactionErrorContent } from '../components/SwapTransactionErrorContent'
 import useWarningImport from '../hooks/useWarningImport'
+import { useSwitchNetwork } from 'hooks/useSwitchNetwork'
+import { useBridgeAvailableRoutes } from '../Bridge/hooks'
+import { useRouter } from 'next/router'
+import { handleCurrencySelectFn } from '../../SwapSimplify/InfinitySwap/FormMainInfinity'
+import CurrencyInputPanelSimplify from 'components/CurrencyInputPanelSimplify'
 
 const Lottie = dynamic(() => import('lottie-react'), { ssr: false })
 
@@ -109,28 +116,9 @@ const useBestTrade = (fromToken?: string, toToken?: string, value?: string) => {
 }
 
 const useUsd = (address?: string) => {
-  const currency = useCurrency(address)
+  const { chainId } = useActiveChainId()
+  const currency = useCurrency(address, chainId)
   return useCurrencyUsdPrice(currency).data
-}
-
-const useTokenModal = (
-  onCurrencySelect: (value: UnifiedCurrency) => void,
-  selectedCurrency?: Currency,
-  otherSelectedCurrency?: Currency,
-) => {
-  const [onPresentCurrencyModal] = useModal(
-    <CurrencySearchModal
-      onCurrencySelect={onCurrencySelect}
-      selectedCurrency={selectedCurrency}
-      otherSelectedCurrency={otherSelectedCurrency}
-      showCommonBases
-      commonBasesType={CommonBasesType.SWAP_LIMITORDER}
-      showSearchInput
-      mode="swap-currency-input"
-    />,
-  )
-
-  return onPresentCurrencyModal
 }
 
 const TransactionErrorContent = ({ onClick, message }: { onClick: () => void; message?: string }) => {
@@ -174,6 +162,129 @@ const Markdown = ({ children }: { children: string }) => {
   )
 }
 
+const TokenPanelInput = ({
+  isSrcToken,
+  inputLoading,
+  value,
+  onChange,
+  onCurrencySelect,
+  isUserInsufficientBalance,
+  inputCurrency,
+  outputCurrency,
+}: {
+  isSrcToken: boolean
+  inputLoading: boolean
+  value: string
+  onChange: (value: string) => void
+  onCurrencySelect: (currency: UnifiedCurrency) => void
+  isUserInsufficientBalance: boolean
+  inputCurrency?: Currency
+  outputCurrency?: Currency
+}) => {
+  const { address: account } = useAccount()
+  const { t } = useTranslation()
+  const loadedUrlParams = useDefaultsFromURLSearch()
+
+  const [inputBalance] = useCurrencyBalances(account, [inputCurrency, outputCurrency])
+
+  const maxAmountInput = useMemo(() => maxAmountSpend(inputBalance), [inputBalance])
+
+  const handlePercentInput = useCallback(
+    (percent: number) => {
+      if (isSrcToken && maxAmountInput) {
+        onChange(maxAmountInput.multiply(new Percent(percent, 100)).toExact())
+      }
+    },
+    [maxAmountInput, onChange, isSrcToken],
+  )
+
+  const handleMaxInput = useCallback(() => {
+    if (isSrcToken && maxAmountInput) {
+      onChange(maxAmountInput.toExact())
+    }
+  }, [maxAmountInput, onChange, isSrcToken])
+
+  console.log({ inputCurrency })
+
+  return (
+    <Suspense fallback={<Skeleton animation="pulse" variant="round" width="100%" height="80px" />}>
+      <CurrencyInputPanelSimplify
+        id={isSrcToken ? 'swap-currency-input' : 'swap-currency-output'}
+        showUSDPrice
+        disabled={!isSrcToken}
+        showMaxButton
+        showCommonBases
+        inputLoading={inputLoading}
+        currencyLoading={!loadedUrlParams}
+        label={isSrcToken ? t('From') : t('To')}
+        defaultValue={value}
+        maxAmount={maxAmountInput}
+        showQuickInputButton
+        currency={inputCurrency}
+        onUserInput={onChange}
+        onPercentInput={handlePercentInput}
+        onMax={handleMaxInput}
+        onCurrencySelect={onCurrencySelect}
+        otherCurrency={outputCurrency}
+        commonBasesType={CommonBasesType.SWAP_LIMITORDER}
+        title={
+          <Text color="textSubtle" fontSize={12} bold>
+            {isSrcToken ? t('From') : t('To')}
+          </Text>
+        }
+        isUserInsufficientBalance={isUserInsufficientBalance}
+        modalTitle={isSrcToken ? t('From') : t('To')}
+        showSearchHeader
+      />
+    </Suspense>
+  )
+}
+
+const useCurrencySelect = () => {
+  const { onCurrencySelection } = useSwapActionHandlers()
+  const warningSwapHandler = useWarningImport()
+  const { canSwitchToChain, switchNetwork } = useSwitchNetwork()
+  const supportedBridgeChains = useBridgeAvailableRoutes()
+  const router = useRouter()
+
+  const {
+    [Field.INPUT]: { currencyId: inputCurrencyId, chainId: inputChainId },
+    [Field.OUTPUT]: { currencyId: outputCurrencyId, chainId: outputChainId },
+  } = useSwapState()
+
+  return useCallback(
+    async (newCurrency: Currency, field: Field) => {
+      return handleCurrencySelectFn({
+        onCurrencySelection,
+        warningSwapHandler,
+        canSwitchToChain,
+        switchNetwork,
+        outputChainId,
+        supportedBridgeChains,
+        inputChainId,
+        inputCurrencyId,
+        outputCurrencyId,
+        router,
+        replaceBrowserHistoryMultiple,
+        newCurrency,
+        field,
+      })
+    },
+    [
+      onCurrencySelection,
+      warningSwapHandler,
+      canSwitchToChain,
+      switchNetwork,
+      outputChainId,
+      supportedBridgeChains,
+      inputChainId,
+      inputCurrencyId,
+      outputCurrencyId,
+      router,
+    ],
+  )
+}
+
 export function TWAPPanel({ limit }: { limit?: boolean }) {
   const { isDesktop } = useMatchBreakpoints()
   const { chainId } = useActiveChainId()
@@ -181,46 +292,35 @@ export function TWAPPanel({ limit }: { limit?: boolean }) {
   const { connector, address } = useAccount()
   const { isDark } = useTheme()
   const native = useNativeCurrency()
-  const { onCurrencySelection } = useSwapActionHandlers()
-  const warningSwapHandler = useWarningImport()
-  const toast = useTwapToast()
   const {
-    [Field.INPUT]: { currencyId: inputCurrencyId },
-    [Field.OUTPUT]: { currencyId: outputCurrencyId },
+    [Field.INPUT]: { currencyId: inputCurrencyId, chainId: inputChainId },
+    [Field.OUTPUT]: { currencyId: outputCurrencyId, chainId: outputChainId },
   } = useSwapState()
 
-  const handleCurrencySelect = useCallback(
-    (isInput: boolean, newCurrency?: Currency) => {
-      onCurrencySelection(isInput ? Field.INPUT : Field.OUTPUT, newCurrency)
-      warningSwapHandler(newCurrency)
+  useDefaultsFromURLSearch()
 
-      const oldCurrencyId = isInput ? inputCurrencyId : outputCurrencyId
-      const otherCurrencyId = isInput ? outputCurrencyId : inputCurrencyId
-      const newCurrencyId = newCurrency ? currencyId(newCurrency) : undefined
-      replaceBrowserHistoryMultiple({
-        ...(newCurrencyId === otherCurrencyId && { [isInput ? 'outputCurrency' : 'inputCurrency']: oldCurrencyId }),
-        [isInput ? 'inputCurrency' : 'outputCurrency']: newCurrencyId,
-      })
-    },
-    [onCurrencySelection, warningSwapHandler, inputCurrencyId, outputCurrencyId],
-  )
+  const handleCurrencySelect = useCurrencySelect()
+
+  const toast = useTwapToast()
 
   const onSrcTokenSelected = useCallback(
     (token: Currency) => {
-      handleCurrencySelect(true, token)
+      handleCurrencySelect(token, Field.INPUT)
     },
     [handleCurrencySelect],
   )
 
   const onDstTokenSelected = useCallback(
     (token: Currency) => {
-      handleCurrencySelect(false, token)
+      handleCurrencySelect(token, Field.OUTPUT)
     },
     [handleCurrencySelect],
   )
 
-  const inputCurrency = useCurrency(inputCurrencyId)
-  const outputCurrency = useCurrency(outputCurrencyId)
+  const inputCurrency = useCurrency(inputCurrencyId, inputChainId)
+  const outputCurrency = useCurrency(outputCurrencyId, outputChainId)
+
+  console.log(inputCurrency, outputCurrency)
 
   const { t } = useTranslation()
 
@@ -235,9 +335,8 @@ export function TWAPPanel({ limit }: { limit?: boolean }) {
         useTrade={useBestTrade}
         dappTokens={tokens}
         isDarkTheme={isDark}
-        srcToken={inputCurrency as any}
-        dstToken={outputCurrency as any}
-        useTokenModal={useTokenModal}
+        srcToken={inputCurrency}
+        dstToken={outputCurrency}
         onSrcTokenSelected={onSrcTokenSelected}
         onDstTokenSelected={onDstTokenSelected}
         isMobile={!isDesktop}
@@ -251,66 +350,10 @@ export function TWAPPanel({ limit }: { limit?: boolean }) {
         FlipButton={FlipButton}
         Input={Input}
         CurrencyLogo={TokenLogo}
-        Balance={Balance}
         ReactMarkdown={Markdown}
+        InputTokenPanel={TokenPanelInput}
       />
     </QuoteProvider>
-  )
-}
-
-const Balance = ({
-  balance,
-  insufficientBalance,
-  isInputFocus,
-  onValueChange,
-  isSrcToken,
-}: {
-  balance?: string
-  insufficientBalance: boolean
-  isInputFocus: boolean
-  onValueChange: (value: string) => void
-  isSrcToken?: boolean
-}) => {
-  const { address: account } = useAccount()
-  const {
-    [Field.INPUT]: { currencyId: inputCurrencyId },
-    [Field.OUTPUT]: { currencyId: outputCurrencyId },
-  } = useSwapState()
-  const inputCurrency = useCurrency(inputCurrencyId)
-  const outputCurrency = useCurrency(outputCurrencyId)
-  const [inputBalance] = useCurrencyBalances(account, [inputCurrency, outputCurrency])
-  const maxAmountInput = useMemo(() => maxAmountSpend(inputBalance), [inputBalance])
-  const onPercentInput = useCallback(
-    (percent: number) => {
-      if (!isSrcToken) return
-      if (maxAmountInput) {
-        onValueChange(maxAmountInput.multiply(new Percent(percent, 100)).toExact())
-      }
-    },
-    [maxAmountInput, onValueChange, isSrcToken],
-  )
-
-  const onMax = useCallback(() => {
-    if (!isSrcToken) return
-    if (maxAmountInput) {
-      onValueChange(maxAmountInput.toExact())
-    }
-  }, [maxAmountInput, onValueChange, isSrcToken])
-
-  return (
-    <LazyAnimatePresence mode="wait" features={domAnimation}>
-      {account ? (
-        !isInputFocus ? (
-          <SwapUIV2.WalletAssetDisplay
-            isUserInsufficientBalance={insufficientBalance}
-            balance={balance}
-            onMax={onMax}
-          />
-        ) : (
-          <SwapUIV2.AssetSettingButtonList onPercentInput={onPercentInput} />
-        )
-      ) : null}
-    </LazyAnimatePresence>
   )
 }
 
