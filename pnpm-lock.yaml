@@ -1477,11 +1477,11 @@ importers:
         specifier: 13.0.7
         version: 13.0.7(bufferutil@4.0.8)(utf-8-validate@5.0.10)
       '@orbs-network/twap-ui':
-        specifier: 0.11.47
-        version: 0.11.47(@ethersproject/abi@5.8.0)(@ethersproject/providers@5.8.0(bufferutil@4.0.8)(utf-8-validate@5.0.10))(@typechain/ethers-v5@10.2.1(@ethersproject/abi@5.8.0)(@ethersproject/providers@5.8.0(bufferutil@4.0.8)(utf-8-validate@5.0.10))(ethers@5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10))(typechain@8.3.2(typescript@5.7.3))(typescript@5.7.3))(@types/react@18.2.37)(bufferutil@4.0.8)(chalk@5.3.0)(encoding@0.1.13)(ethers@5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10))(immer@9.0.21)(react-dom@18.2.0(react@18.2.0))(react-native@0.73.6(@babel/core@7.23.9)(@babel/preset-env@7.23.3(@babel/core@7.23.9))(bufferutil@4.0.8)(encoding@0.1.13)(react@18.2.0)(utf-8-validate@5.0.10))(react@18.2.0)(utf-8-validate@5.0.10)(web3-core@1.10.4(encoding@0.1.13))(web3-eth-contract@1.10.4(encoding@0.1.13))
+        specifier: 0.11.49
+        version: 0.11.49(@ethersproject/abi@5.8.0)(@ethersproject/providers@5.8.0(bufferutil@4.0.8)(utf-8-validate@5.0.10))(@typechain/ethers-v5@10.2.1(@ethersproject/abi@5.8.0)(@ethersproject/providers@5.8.0(bufferutil@4.0.8)(utf-8-validate@5.0.10))(ethers@5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10))(typechain@8.3.2(typescript@5.7.3))(typescript@5.7.3))(@types/react@18.2.37)(bufferutil@4.0.8)(chalk@5.3.0)(encoding@0.1.13)(ethers@5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10))(immer@9.0.21)(react-dom@18.2.0(react@18.2.0))(react-native@0.73.6(@babel/core@7.23.9)(@babel/preset-env@7.23.3(@babel/core@7.23.9))(bufferutil@4.0.8)(encoding@0.1.13)(react@18.2.0)(utf-8-validate@5.0.10))(react@18.2.0)(utf-8-validate@5.0.10)(web3-core@1.10.4(encoding@0.1.13))(web3-eth-contract@1.10.4(encoding@0.1.13))
       '@orbs-network/twap-ui-pancake':
-        specifier: 0.11.47
-        version: 0.11.47(@emotion/react@11.13.5(@types/react@18.2.37)(react@18.2.0))(@emotion/styled@11.13.5(@emotion/react@11.13.5(@types/react@18.2.37)(react@18.2.0))(@types/react@18.2.37)(react@18.2.0))(@ethersproject/abi@5.8.0)(@ethersproject/providers@5.8.0(bufferutil@4.0.8)(utf-8-validate@5.0.10))(@typechain/ethers-v5@10.2.1(@ethersproject/abi@5.8.0)(@ethersproject/providers@5.8.0(bufferutil@4.0.8)(utf-8-validate@5.0.10))(ethers@5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10))(typechain@8.3.2(typescript@5.7.3))(typescript@5.7.3))(@types/react@18.2.37)(bufferutil@4.0.8)(chalk@5.3.0)(encoding@0.1.13)(ethers@5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10))(immer@9.0.21)(react-dom@18.2.0(react@18.2.0))(react-native@0.73.6(@babel/core@7.23.9)(@babel/preset-env@7.23.3(@babel/core@7.23.9))(bufferutil@4.0.8)(encoding@0.1.13)(react@18.2.0)(utf-8-validate@5.0.10))(react@18.2.0)(utf-8-validate@5.0.10)(web3-core@1.10.4(encoding@0.1.13))(web3-eth-contract@1.10.4(encoding@0.1.13))
+        specifier: 0.11.49
+        version: 0.11.49(@emotion/react@11.13.5(@types/react@18.2.37)(react@18.2.0))(@emotion/styled@11.13.5(@emotion/react@11.13.5(@types/react@18.2.37)(react@18.2.0))(@types/react@18.2.37)(react@18.2.0))(@ethersproject/abi@5.8.0)(@ethersproject/providers@5.8.0(bufferutil@4.0.8)(utf-8-validate@5.0.10))(@typechain/ethers-v5@10.2.1(@ethersproject/abi@5.8.0)(@ethersproject/providers@5.8.0(bufferutil@4.0.8)(utf-8-validate@5.0.10))(ethers@5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10))(typechain@8.3.2(typescript@5.7.3))(typescript@5.7.3))(@types/react@18.2.37)(bufferutil@4.0.8)(chalk@5.3.0)(encoding@0.1.13)(ethers@5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10))(immer@9.0.21)(react-dom@18.2.0(react@18.2.0))(react-native@0.73.6(@babel/core@7.23.9)(@babel/preset-env@7.23.3(@babel/core@7.23.9))(bufferutil@4.0.8)(encoding@0.1.13)(react@18.2.0)(utf-8-validate@5.0.10))(react@18.2.0)(utf-8-validate@5.0.10)(web3-core@1.10.4(encoding@0.1.13))(web3-eth-contract@1.10.4(encoding@0.1.13))
       '@pancakeswap/achievements':
         specifier: workspace:*
         version: link:../../packages/achievements
@@ -9820,14 +9820,14 @@ packages:
   '@openzeppelin/contracts@4.9.6':
     resolution: {integrity: sha512-xSmezSupL+y9VkHZJGDoCBpmnB2ogM13ccaYDWqJTfS3dbuHkgjuwDFUmaFauBCboQMGB/S5UqUl2y54X99BmA==}
 
-  '@orbs-network/twap-ui-pancake@0.11.47':
-    resolution: {integrity: sha512-qlx2+jKpJdC+c94S1ogNQIfgAeRtCC38TbuTEEI7ANG4fmB2RwHJ3kf1mPS95fIz5loFuCG9SpVOXOor8BtHGw==}
+  '@orbs-network/twap-ui-pancake@0.11.49':
+    resolution: {integrity: sha512-g4MsfFPStTysL7Hh8sOwMrVdlWmTlcbvfcz8aUfJ/EISy7ZSYI2famYBSgfnGn8wVth0JZ1bP4/o4JzyMUcEMA==}
     peerDependencies:
       react: '*'
       react-dom: '*'
 
-  '@orbs-network/twap-ui@0.11.47':
-    resolution: {integrity: sha512-eTEn1OqWCNIjee+uZfaKlsyqJClYwop4Oi5VscA/cxBC8R9+bDR+j/z9Kdc5huUBAe8/+U5XQ74JfdJjtbZONQ==}
+  '@orbs-network/twap-ui@0.11.49':
+    resolution: {integrity: sha512-6roV1eaq8ot+WrJN0vNeXPlbLjSx2Hmb651AiO04gvmM4iH2sbhA/A5n3MyGf2bwPvZphV9brkBKiHXdS7bD+g==}
     peerDependencies:
       react: '*'
       react-dom: '*'
@@ -26526,12 +26526,6 @@ snapshots:
     optionalDependencies:
       graphql: 16.8.1
 
-  '@0no-co/graphqlsp@1.13.0(graphql@16.11.0)(typescript@5.7.3)':
-    dependencies:
-      '@gql.tada/internal': 1.0.8(graphql@16.11.0)(typescript@5.7.3)
-      graphql: 16.11.0
-      typescript: 5.7.3
-
   '@0no-co/graphqlsp@1.13.0(graphql@16.8.1)(typescript@5.7.3)':
     dependencies:
       '@gql.tada/internal': 1.0.8(graphql@16.8.1)(typescript@5.7.3)
@@ -32832,7 +32826,7 @@ snapshots:
       - supports-color
     optional: true
 
-  '@gql.tada/cli-utils@1.7.0(@0no-co/graphqlsp@1.13.0(graphql@16.8.1)(typescript@5.7.3))(graphql@16.11.0)(typescript@5.7.3)':
+  '@gql.tada/cli-utils@1.7.0(@0no-co/graphqlsp@1.13.0(graphql@16.11.0)(typescript@5.7.3))(graphql@16.11.0)(typescript@5.7.3)':
     dependencies:
       '@0no-co/graphqlsp': 1.13.0(graphql@16.8.1)(typescript@5.7.3)
       '@gql.tada/internal': 1.0.8(graphql@16.11.0)(typescript@5.7.3)
@@ -32841,7 +32835,7 @@ snapshots:
 
   '@gql.tada/internal@1.0.8(graphql@16.11.0)(typescript@5.7.3)':
     dependencies:
-      '@0no-co/graphql.web': 1.1.2(graphql@16.11.0)
+      '@0no-co/graphql.web': 1.1.2(graphql@16.8.1)
       graphql: 16.11.0
       typescript: 5.7.3
 
@@ -36214,13 +36208,13 @@ snapshots:
   '@openzeppelin/contracts@4.9.6':
     optional: true
 
-  '@orbs-network/twap-ui-pancake@0.11.47(@emotion/react@11.13.5(@types/react@18.2.37)(react@18.2.0))(@emotion/styled@11.13.5(@emotion/react@11.13.5(@types/react@18.2.37)(react@18.2.0))(@types/react@18.2.37)(react@18.2.0))(@ethersproject/abi@5.8.0)(@ethersproject/providers@5.8.0(bufferutil@4.0.8)(utf-8-validate@5.0.10))(@typechain/ethers-v5@10.2.1(@ethersproject/abi@5.8.0)(@ethersproject/providers@5.8.0(bufferutil@4.0.8)(utf-8-validate@5.0.10))(ethers@5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10))(typechain@8.3.2(typescript@5.7.3))(typescript@5.7.3))(@types/react@18.2.37)(bufferutil@4.0.8)(chalk@5.3.0)(encoding@0.1.13)(ethers@5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10))(immer@9.0.21)(react-dom@18.2.0(react@18.2.0))(react-native@0.73.6(@babel/core@7.23.9)(@babel/preset-env@7.23.3(@babel/core@7.23.9))(bufferutil@4.0.8)(encoding@0.1.13)(react@18.2.0)(utf-8-validate@5.0.10))(react@18.2.0)(utf-8-validate@5.0.10)(web3-core@1.10.4(encoding@0.1.13))(web3-eth-contract@1.10.4(encoding@0.1.13))':
+  '@orbs-network/twap-ui-pancake@0.11.49(@emotion/react@11.13.5(@types/react@18.2.37)(react@18.2.0))(@emotion/styled@11.13.5(@emotion/react@11.13.5(@types/react@18.2.37)(react@18.2.0))(@types/react@18.2.37)(react@18.2.0))(@ethersproject/abi@5.8.0)(@ethersproject/providers@5.8.0(bufferutil@4.0.8)(utf-8-validate@5.0.10))(@typechain/ethers-v5@10.2.1(@ethersproject/abi@5.8.0)(@ethersproject/providers@5.8.0(bufferutil@4.0.8)(utf-8-validate@5.0.10))(ethers@5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10))(typechain@8.3.2(typescript@5.7.3))(typescript@5.7.3))(@types/react@18.2.37)(bufferutil@4.0.8)(chalk@5.3.0)(encoding@0.1.13)(ethers@5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10))(immer@9.0.21)(react-dom@18.2.0(react@18.2.0))(react-native@0.73.6(@babel/core@7.23.9)(@babel/preset-env@7.23.3(@babel/core@7.23.9))(bufferutil@4.0.8)(encoding@0.1.13)(react@18.2.0)(utf-8-validate@5.0.10))(react@18.2.0)(utf-8-validate@5.0.10)(web3-core@1.10.4(encoding@0.1.13))(web3-eth-contract@1.10.4(encoding@0.1.13))':
     dependencies:
       '@defi.org/web3-candies': 4.20.17(@ethersproject/abi@5.8.0)(@ethersproject/providers@5.8.0(bufferutil@4.0.8)(utf-8-validate@5.0.10))(@typechain/ethers-v5@10.2.1(@ethersproject/abi@5.8.0)(@ethersproject/providers@5.8.0(bufferutil@4.0.8)(utf-8-validate@5.0.10))(ethers@5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10))(typechain@8.3.2(typescript@5.7.3))(typescript@5.7.3))(bufferutil@4.0.8)(chalk@5.3.0)(encoding@0.1.13)(ethers@5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10))(utf-8-validate@5.0.10)(web3-core@1.10.4(encoding@0.1.13))(web3-eth-contract@1.10.4(encoding@0.1.13))
       '@mui/material': 5.15.10(@emotion/react@11.13.5(@types/react@18.2.37)(react@18.2.0))(@emotion/styled@11.13.5(@emotion/react@11.13.5(@types/react@18.2.37)(react@18.2.0))(@types/react@18.2.37)(react@18.2.0))(@types/react@18.2.37)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@mui/system': 5.15.9(@emotion/react@11.13.5(@types/react@18.2.37)(react@18.2.0))(@emotion/styled@11.13.5(@emotion/react@11.13.5(@types/react@18.2.37)(react@18.2.0))(@types/react@18.2.37)(react@18.2.0))(@types/react@18.2.37)(react@18.2.0)
       '@orbs-network/twap': 1.24.1(@ethersproject/abi@5.8.0)(@ethersproject/providers@5.8.0(bufferutil@4.0.8)(utf-8-validate@5.0.10))(@typechain/ethers-v5@10.2.1(@ethersproject/abi@5.8.0)(@ethersproject/providers@5.8.0(bufferutil@4.0.8)(utf-8-validate@5.0.10))(ethers@5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10))(typechain@8.3.2(typescript@5.7.3))(typescript@5.7.3))(bufferutil@4.0.8)(chalk@5.3.0)(encoding@0.1.13)(ethers@5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10))(utf-8-validate@5.0.10)(web3-core@1.10.4(encoding@0.1.13))(web3-eth-contract@1.10.4(encoding@0.1.13))
-      '@orbs-network/twap-ui': 0.11.47(@ethersproject/abi@5.8.0)(@ethersproject/providers@5.8.0(bufferutil@4.0.8)(utf-8-validate@5.0.10))(@typechain/ethers-v5@10.2.1(@ethersproject/abi@5.8.0)(@ethersproject/providers@5.8.0(bufferutil@4.0.8)(utf-8-validate@5.0.10))(ethers@5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10))(typechain@8.3.2(typescript@5.7.3))(typescript@5.7.3))(@types/react@18.2.37)(bufferutil@4.0.8)(chalk@5.3.0)(encoding@0.1.13)(ethers@5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10))(immer@9.0.21)(react-dom@18.2.0(react@18.2.0))(react-native@0.73.6(@babel/core@7.23.9)(@babel/preset-env@7.23.3(@babel/core@7.23.9))(bufferutil@4.0.8)(encoding@0.1.13)(react@18.2.0)(utf-8-validate@5.0.10))(react@18.2.0)(utf-8-validate@5.0.10)(web3-core@1.10.4(encoding@0.1.13))(web3-eth-contract@1.10.4(encoding@0.1.13))
+      '@orbs-network/twap-ui': 0.11.49(@ethersproject/abi@5.8.0)(@ethersproject/providers@5.8.0(bufferutil@4.0.8)(utf-8-validate@5.0.10))(@typechain/ethers-v5@10.2.1(@ethersproject/abi@5.8.0)(@ethersproject/providers@5.8.0(bufferutil@4.0.8)(utf-8-validate@5.0.10))(ethers@5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10))(typechain@8.3.2(typescript@5.7.3))(typescript@5.7.3))(@types/react@18.2.37)(bufferutil@4.0.8)(chalk@5.3.0)(encoding@0.1.13)(ethers@5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10))(immer@9.0.21)(react-dom@18.2.0(react@18.2.0))(react-native@0.73.6(@babel/core@7.23.9)(@babel/preset-env@7.23.3(@babel/core@7.23.9))(bufferutil@4.0.8)(encoding@0.1.13)(react@18.2.0)(utf-8-validate@5.0.10))(react@18.2.0)(utf-8-validate@5.0.10)(web3-core@1.10.4(encoding@0.1.13))(web3-eth-contract@1.10.4(encoding@0.1.13))
       lodash: 4.17.21
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -36248,7 +36242,7 @@ snapshots:
       - web3-core
       - web3-eth-contract
 
-  '@orbs-network/twap-ui@0.11.47(@ethersproject/abi@5.8.0)(@ethersproject/providers@5.8.0(bufferutil@4.0.8)(utf-8-validate@5.0.10))(@typechain/ethers-v5@10.2.1(@ethersproject/abi@5.8.0)(@ethersproject/providers@5.8.0(bufferutil@4.0.8)(utf-8-validate@5.0.10))(ethers@5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10))(typechain@8.3.2(typescript@5.7.3))(typescript@5.7.3))(@types/react@18.2.37)(bufferutil@4.0.8)(chalk@5.3.0)(encoding@0.1.13)(ethers@5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10))(immer@9.0.21)(react-dom@18.2.0(react@18.2.0))(react-native@0.73.6(@babel/core@7.23.9)(@babel/preset-env@7.23.3(@babel/core@7.23.9))(bufferutil@4.0.8)(encoding@0.1.13)(react@18.2.0)(utf-8-validate@5.0.10))(react@18.2.0)(utf-8-validate@5.0.10)(web3-core@1.10.4(encoding@0.1.13))(web3-eth-contract@1.10.4(encoding@0.1.13))':
+  '@orbs-network/twap-ui@0.11.49(@ethersproject/abi@5.8.0)(@ethersproject/providers@5.8.0(bufferutil@4.0.8)(utf-8-validate@5.0.10))(@typechain/ethers-v5@10.2.1(@ethersproject/abi@5.8.0)(@ethersproject/providers@5.8.0(bufferutil@4.0.8)(utf-8-validate@5.0.10))(ethers@5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10))(typechain@8.3.2(typescript@5.7.3))(typescript@5.7.3))(@types/react@18.2.37)(bufferutil@4.0.8)(chalk@5.3.0)(encoding@0.1.13)(ethers@5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10))(immer@9.0.21)(react-dom@18.2.0(react@18.2.0))(react-native@0.73.6(@babel/core@7.23.9)(@babel/preset-env@7.23.3(@babel/core@7.23.9))(bufferutil@4.0.8)(encoding@0.1.13)(react@18.2.0)(utf-8-validate@5.0.10))(react@18.2.0)(utf-8-validate@5.0.10)(web3-core@1.10.4(encoding@0.1.13))(web3-eth-contract@1.10.4(encoding@0.1.13))':
     dependencies:
       '@defi.org/web3-candies': 4.20.17(@ethersproject/abi@5.8.0)(@ethersproject/providers@5.8.0(bufferutil@4.0.8)(utf-8-validate@5.0.10))(@typechain/ethers-v5@10.2.1(@ethersproject/abi@5.8.0)(@ethersproject/providers@5.8.0(bufferutil@4.0.8)(utf-8-validate@5.0.10))(ethers@5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10))(typechain@8.3.2(typescript@5.7.3))(typescript@5.7.3))(bufferutil@4.0.8)(chalk@5.3.0)(encoding@0.1.13)(ethers@5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10))(utf-8-validate@5.0.10)(web3-core@1.10.4(encoding@0.1.13))(web3-eth-contract@1.10.4(encoding@0.1.13))
       '@emotion/react': 11.13.5(@types/react@18.2.37)(react@18.2.0)
@@ -53442,8 +53436,8 @@ snapshots:
   gql.tada@1.8.12(graphql@16.11.0)(typescript@5.7.3):
     dependencies:
       '@0no-co/graphql.web': 1.1.2(graphql@16.11.0)
-      '@0no-co/graphqlsp': 1.13.0(graphql@16.11.0)(typescript@5.7.3)
-      '@gql.tada/cli-utils': 1.7.0(@0no-co/graphqlsp@1.13.0(graphql@16.8.1)(typescript@5.7.3))(graphql@16.11.0)(typescript@5.7.3)
+      '@0no-co/graphqlsp': 1.13.0(graphql@16.8.1)(typescript@5.7.3)
+      '@gql.tada/cli-utils': 1.7.0(@0no-co/graphqlsp@1.13.0(graphql@16.11.0)(typescript@5.7.3))(graphql@16.11.0)(typescript@5.7.3)
       '@gql.tada/internal': 1.0.8(graphql@16.11.0)(typescript@5.7.3)
       typescript: 5.7.3
     transitivePeerDependencies:
