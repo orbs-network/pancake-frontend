@@ -1,4 +1,4 @@
-import { useDebounce } from '@orbs-network/twap-ui/dist/hooks'
+import { useDebounce } from '@pancakeswap/hooks'
 import { TradeType } from '@pancakeswap/swap-sdk-core'
 import tryParseAmount from '@pancakeswap/utils/tryParseAmount'
 import { useUnifiedCurrency } from 'hooks/Tokens'

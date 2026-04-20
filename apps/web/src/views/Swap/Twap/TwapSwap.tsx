@@ -1,9 +1,7 @@
-import { useTranslation } from '@pancakeswap/localization'
-import { AutoRow, BottomDrawer, Box, Flex, StyledLink, Text, useMatchBreakpoints } from '@pancakeswap/uikit'
+import { BottomDrawer, Box, Flex, useMatchBreakpoints } from '@pancakeswap/uikit'
 import { useCurrency } from 'hooks/Tokens'
 import { useSwapHotTokenDisplay } from 'hooks/useSwapHotTokenDisplay'
 import dynamic from 'next/dynamic'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 import { Field } from 'state/swap/actions'
@@ -14,23 +12,22 @@ import { QuoteProvider } from 'quoter/QuoteProvider'
 import { SwapSelection } from '../../SwapSimplify/InfinitySwap/SwapSelectionTab'
 import { SwapFeaturesContext } from '../SwapFeaturesContext'
 import { SwapType } from '../types'
-import { OrderHistory, TWAPPanel } from './Twap'
+import { TWAPPanel } from './Twap'
+import { TwapOrdersTarget } from './Orders/Orders'
 
 const ChartWithPriceHeader = dynamic(() => import('components/Chart/ChartWithPriceHeader'), { ssr: false })
 
-export default function TwapAndLimitSwap({ limit }: { limit?: boolean }) {
+export default function TwapAndLimitSwap() {
   return (
     <QuoteProvider>
-      <TwapAndLimitSwapInner limit={limit} />
+      <TwapAndLimitSwapInner />
     </QuoteProvider>
   )
 }
-const TwapAndLimitSwapInner = ({ limit }: { limit?: boolean }) => {
+const TwapAndLimitSwapInner = () => {
   const { query } = useRouter()
-  const { t } = useTranslation()
   const { isDesktop, isMobile } = useMatchBreakpoints()
-  const { setIsChartDisplayed, setIsChartExpanded, isChartExpanded, isChartSupported, isChartDisplayed } =
-    useContext(SwapFeaturesContext)
+  const { setIsChartDisplayed, isChartExpanded, isChartDisplayed } = useContext(SwapFeaturesContext)
   const [isSwapHotTokenDisplay, setIsSwapHotTokenDisplay] = useSwapHotTokenDisplay()
   const [firstTime, setFirstTime] = useState(true)
 
@@ -77,7 +74,7 @@ const TwapAndLimitSwapInner = ({ limit }: { limit?: boolean }) => {
                 symbol={`${inputCurrency?.symbol}/${outputCurrency?.symbol}`}
               />
             )}
-            <OrderHistory />
+            <TwapOrdersTarget />
           </Flex>
         )}
         {!isDesktop && (
@@ -97,27 +94,9 @@ const TwapAndLimitSwapInner = ({ limit }: { limit?: boolean }) => {
         <Flex flexDirection="column" width={isDesktop ? undefined : '100%'}>
           <StyledSwapContainer $isChartExpanded={isChartExpanded}>
             <StyledInputCurrencyWrapper mt={isChartExpanded ? '24px' : '0'}>
-              <SwapSelection
-                swapType={limit ? SwapType.LIMIT : SwapType.TWAP}
-                style={{ marginBottom: 16 }}
-                withToolkit
-              />
-              <TWAPPanel limit={limit} />
-              <Flex flexDirection={!isDesktop ? 'column-reverse' : 'column'}>
-                {limit && (
-                  <AutoRow gap="4px" justifyContent="center">
-                    <Text fontSize="14px" color="textSubtle">
-                      {t('Orders missing? Check out:')}
-                    </Text>
-                    <Link href="/limit-orders" passHref prefetch={false}>
-                      <StyledLink fontSize="14px" color="primary">
-                        {t('Limit V2 (deprecated)')}
-                      </StyledLink>
-                    </Link>
-                  </AutoRow>
-                )}
-                {!isDesktop && <OrderHistory />}
-              </Flex>
+              <SwapSelection swapType={SwapType.TWAP} style={{ marginBottom: 16 }} withToolkit />
+              <TWAPPanel />
+              {!isDesktop && <TwapOrdersTarget />}
             </StyledInputCurrencyWrapper>
           </StyledSwapContainer>
         </Flex>

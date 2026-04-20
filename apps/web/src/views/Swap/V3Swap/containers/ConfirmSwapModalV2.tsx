@@ -208,7 +208,7 @@ export const ConfirmSwapModalV2: React.FC<ConfirmSwapModalV2Props> = ({
       }
       return (
         <SwapPendingModalContent
-          title={title}
+          title=""
           currencyA={currencyA}
           currencyB={currencyB}
           amountA={amountA}

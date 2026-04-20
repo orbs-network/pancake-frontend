@@ -6,10 +6,6 @@ import {
   ChartDisableIcon,
   ChartIcon,
   IconButton,
-  Text,
-  TooltipText,
-  useMatchBreakpoints,
-  useTooltip,
 } from '@pancakeswap/uikit'
 import { useActiveChainId } from 'hooks/useActiveChainId'
 import { useIsSmartAccount } from 'hooks/useIsSmartAccount'
@@ -31,29 +27,13 @@ const ColoredIconButton = styled(IconButton)`
 const StyledButtonMenuItem = styled(ButtonMenuItem)`
   height: 40px;
   padding: 0px 16px;
-  * ${({ theme }) => theme.mediaQueries.md} {
+  font-size: 13px;
+  ${({ theme }) => theme.mediaQueries.md} {
+    font-size: 16px;
     width: 124px;
     padding: 0px 24px;
   }
 `
-const StyledButtonMenuItemTooltip = styled(StyledButtonMenuItem)`
-  padding: 0px;
-  > div {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    padding: 0px 16px;
-    color: inherit;
-    font-weight: inherit;
-  }
-  * ${({ theme }) => theme.mediaQueries.md} {
-    padding: 0px;
-  }
-`
-
 const SwapSelectionWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -102,19 +82,7 @@ export const SwapSelection = ({
     [router],
   )
   const { chainId } = useActiveChainId()
-  const { isMobile } = useMatchBreakpoints()
   const isSmartAccount = useIsSmartAccount()
-
-  const { targetRef, tooltip, tooltipVisible } = useTooltip(
-    <Text>
-      {isSmartAccount
-        ? t('TWAP and Limit orders are currently not supported for Smart Account wallets.')
-        : t(
-            'TWAP (Time-Weighted Average Price) helps minimises market impact from large orders by averaging the asset price over a set time period.',
-          )}
-    </Text>,
-    { placement: 'top' },
-  )
 
   const [isChartDisplayed, setIsChartDisplayed] = useAtom(chartDisplayAtom)
 
@@ -160,16 +128,8 @@ export const SwapSelection = ({
         fullWidth
       >
         <StyledButtonMenuItem>{t('Swap')}</StyledButtonMenuItem>
-        {isMobile ? (
-          <StyledButtonMenuItemTooltip {...tSwapProps}>{t('TWAP')}</StyledButtonMenuItemTooltip>
-        ) : (
-          <StyledButtonMenuItemTooltip {...tSwapProps}>
-            <TooltipText ref={targetRef}>{t('TWAP')}</TooltipText>
-            {tooltipVisible && tooltip}
-          </StyledButtonMenuItemTooltip>
-        )}
-
         <StyledButtonMenuItem {...limitProps}>{t('Limit')}</StyledButtonMenuItem>
+        <StyledButtonMenuItem {...tSwapProps}>{t('Advanced')}</StyledButtonMenuItem>
       </ButtonMenu>
 
       {withToolkit && !SWAP_CHART_UNSUPPORTED_CHAINS.includes(chainId) && (

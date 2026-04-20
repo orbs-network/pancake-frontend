@@ -57,7 +57,7 @@ const ChainOption = styled(Flex)`
 
 const useIsTwap = () => {
   const router = useRouter()
-  return router.pathname.includes('twap') || router.pathname.includes('limit')
+  return router.pathname.includes('twap')
 }
 
 const useCustomChains = () => {

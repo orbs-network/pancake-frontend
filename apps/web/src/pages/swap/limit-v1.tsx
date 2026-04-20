@@ -33,7 +33,7 @@ const View = () => {
 
   return (
     <SwapLayout>
-      <TwapAndLimitSwap limit />
+      <TwapAndLimitSwap />
     </SwapLayout>
   )
 }
